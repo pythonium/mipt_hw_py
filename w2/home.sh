@@ -1,6 +1,5 @@
 #!/bin/bash
-mkdir /hellohome
-cd /hellohome
-echo "hello home!!" > home.txt
-cat home.txt
-ls -l home.txt
+mkdir ~/hellohome
+echo "hello home!!" > ~/hellohome/home.txt
+cat ~/hellohome/home.txt
+ls -l ~/hellohome/home.txt
