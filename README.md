@@ -1,5 +1,6 @@
 # Неделя 3
 1. Создайте произвольный текстовый файл с несколькими строками произвольного текста. Выведите в консоль строки файла, удалив лишние пробелы в начале и конце строк, если они есть (strip).
+**1.py**
 in:
 ```python
 with open("1.txt", "r") as file:
@@ -12,6 +13,7 @@ hello world!!
 goodbye world!!
 ```
 2. Запишите в новый файл содержимое списка строк (каждую строку с новой строки) без использования цикла.
+**2.py**
 in:
 ```python
 def write_array(array, file_name):
@@ -38,6 +40,7 @@ you
 3. Вам дана в [архиве](http://cs.mipt.ru/advanced_python/extra/lab3/main.zip) файловая структура, состоящая из директорий и файлов.
 Необходимо распаковать этот архив **средствами языка python**, и затем найти в данной в файловой структуре все директории, в которых есть хотя бы один файл с расширением ".py".
 Ответом на данную задачу будет являться файл со списком таких директорий, отсортированных в **лексикографическом порядке**.
+**3.py**
 ```python
 def write_array(array, file_name):
         array = '\n'.join(array)
@@ -169,6 +172,7 @@ zljoz
 zyczx
 ```
 7. Создать код, который выбрасывает `ZeroDivisionError`. Обернуть его в `try/except` и вывести "Делим на ноль" в случае деления на ноль.
+**8.py** (случилась чехарда с названиями)
 ```python
 try:
         x = 8/0
@@ -179,6 +183,7 @@ except ZeroDivisionError:
 Окружить код `try/except` и добавить `finally` блок, где вывести "Дошел до finally".
 Попробовать запустить программу нормально (без выбрасывания исключения) и с исключением.
 В обоих случаях должен выполняться код из `finally`.
+**9.py**
 in[1]:
 ```python
 try:
@@ -205,4 +210,55 @@ finally:
 out[2]:
 ```python
 дошел до "finally"
+```
+9. Создать свое исключение (название любое).
+Написать код, который выбрасывает его с неким сообщением.
+**Не перехватывайте** это исключение в коде - цель задания заключается в том, чтобы увидеть, как он отображается в консоли.
+**10.py**
+in:
+```python
+class WrongUserName(Exception):
+    def __init__(self, username):
+        self.username = username
+        self.message = "no such username"
+        super().__init__(self.message)
+
+username = 'maxlaimon'
+if username != 'plutonium':
+        raise WrongUserName(username)
+```
+out:
+```python
+Traceback (most recent call last):
+  File "10.py", line 9, in <module>
+    raise WrongUserName(username)
+__main__.WrongUserName: no such username
+```
+10. Написать код, который вызывает функции в порядке `a() -> b() -> c()`, а в функцию `c` заложите `raise ValueError('my exception')` (_функции `a`, `b`, `c` надо самому объявить_).
+Посмотрите на стек-трейс - видно ли, где из трех функций появилась ошибка?
+Сделайте скриншот, залейте в репозиторий и будьте готовы ответить на вопросы по чтению stack trace.
+**11.py**
+in:
+```python
+def a():
+        print("This is function a")
+def b():
+        print("This is function b")
+def c():
+        raise ValueError('my exception')
+        print("This is function c")
+a()
+b()
+c()
+```
+out:
+```python
+This is function a
+This is function b
+Traceback (most recent call last):
+  File "11.py", line 11, in <module>
+    c()
+  File "11.py", line 7, in c
+    raise ValueError('my exception')
+ValueError: my exception
 ```
