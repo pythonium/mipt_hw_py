@@ -168,3 +168,41 @@ zfukg
 zljoz
 zyczx
 ```
+7. Создать код, который выбрасывает `ZeroDivisionError`. Обернуть его в `try/except` и вывести "Делим на ноль" в случае деления на ноль.
+```python
+try:
+        x = 8/0
+except ZeroDivisionError:
+        print("Делим на ноль")
+```
+8. Создать код, который может выбросить `ValueError` (_это может быть попытка привести к `int` "плохую" строку_).
+Окружить код `try/except` и добавить `finally` блок, где вывести "Дошел до finally".
+Попробовать запустить программу нормально (без выбрасывания исключения) и с исключением.
+В обоих случаях должен выполняться код из `finally`.
+in[1]:
+```python
+try:
+        int("asdf")
+except ValueError:
+        print("не интуится(((")
+finally:
+        print("дошел до \"finally\"")
+```
+out[1]:
+```python
+не интуится(((
+дошел до "finally"
+```
+in[2]:
+```python
+try:
+        int("235")
+except ValueError:
+        print("не интуится(((")
+finally:
+        print("дошел до \"finally\"")
+```
+out[2]:
+```python
+дошел до "finally"
+```
