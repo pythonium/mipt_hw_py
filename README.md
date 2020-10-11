@@ -9,7 +9,7 @@ import sys
 print(sys.argv)
 print(len(sys.argv) - 1)
 ```
-In: ```python 1.py 22 33 44 ```
+In: ```python3 1.py 22 33 44 ```
 
 Out:
 ```python
@@ -52,9 +52,9 @@ namespace = parser.parse_args()
 
 print(fibonacci(namespace.n))
 ```
-In: ```python python3 3.py -n 8```
+In: ```python3 3.py -n 8```
 
-Out: ```python 21```
+Out: ``` 21```
 
 4. Напишите программу, которая на вход принимает три аргумента `--show-all (-a)`, `--file (-f) <file>` и один позиционный `number` и выводит n-ое простое число.
 Если передан аргумент командной строки `--show-all` или `-a`, то необходимо показывать все предыдущие простые числа (иначе показать только последнее).
@@ -104,14 +104,14 @@ else:
 		namespace.file.write(str(primes[-1]))
 ```
 
-In: ```python python3 4.py 8 -a```
+In: ```python3 4.py 8 -a```
 
 Out:
 ```python
 23
 2 3 5 7 11 13 17 19 23
 ```
-In:```python python3 4.py 8 -a -f 4.txt```
+In:```python3 4.py 8 -a -f 4.txt```
 
 4.txt:
 ```python
