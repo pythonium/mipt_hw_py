@@ -22,3 +22,4 @@ with open("3.txt", "w") as file:
 with open("3.txt", "r") as file:
 	for line in file:
 		print(line)
+
