@@ -1,10 +1,11 @@
-class WrongUserName(Exception):
-    def __init__(self, username):
-        self.username = username
-        self.message = "no such username"
-        super().__init__(self.message)
 
-username = 'maxlaimon'
-if username != 'plutonium':
-	raise WrongUserName(username)
-
+def a():
+	print("This is function a")
+def b():
+	print("This is function b")
+def c():
+	raise ValueError('my exception')
+	print("This is function c")
+a()
+b()
+c()

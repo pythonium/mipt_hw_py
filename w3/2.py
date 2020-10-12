@@ -8,3 +8,4 @@ with open("2.txt", "w") as file:
 with open("2.txt", "r") as file:
 	for line in file:
 		print(line)
+

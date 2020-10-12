@@ -1,4 +1,6 @@
 try:
-    x = 8/0
-except ZeroDivisionError:
-    print("Делим на ноль")
+    int("asdf")
+except ValueError:
+    print("не интуится(((")
+finally:
+    print("дошел до \"finally\"")
