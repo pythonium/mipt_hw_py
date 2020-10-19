@@ -9,8 +9,8 @@ class Enemy(Attacker):
 
 
 def generate_random_enemy():
-    RandomEnemyType = choice(enemy_types)
-    enemy = RandomEnemyType()
+    random_enemy_type = choice(enemy_types)
+    enemy = random_enemy_type()
     return enemy
 
 
@@ -41,7 +41,7 @@ class GreenDragon(Dragon):
         x = randint(1,100)
         y = randint(1,100)
         self.__quest = str(x) + '+' + str(y)
-        self.set_answer(x + y)
+        self.set_answer([x + y])
         return self.__quest
 
 class BlackDragon(Dragon):
@@ -54,7 +54,7 @@ class BlackDragon(Dragon):
         x = randint(1,100)
         y = randint(1,100)
         self.__quest = str(x) + '*' + str(y)
-        self.set_answer(x * y)
+        self.set_answer([x * y])
         return self.__quest
 
 class RedDragon(Dragon):
@@ -67,8 +67,34 @@ class RedDragon(Dragon):
         x = randint(1,100)
         y = randint(1,100)
         self.__quest = str(x) + '-' + str(y)
-        self.set_answer(x - y)
+        self.set_answer([x - y])
         return self.__quest
 
+class Troll(Dragon):
+    def __init__(self):
+        self._health = 200
+        self._attack = 10
+        self._color = None
 
-enemy_types = [GreenDragon, RedDragon, BlackDragon]
+    def question(self):
+        n = randint(1,100)
+        self.__quest = "Разложи на простые множители " + str(n) + "\n Записывай в порядке возрастания"
+
+        Ans = []
+
+        d = 2
+        while d * d <= n:
+            if n % d == 0:
+                Ans.append(d)
+                n //= d
+            else:
+                d += 1
+        if n > 1:
+            Ans.append(n)
+        ans_str = " ".join(map(str, Ans))
+
+
+        self.set_answer(Ans)
+        return self.__quest
+
+enemy_types = [GreenDragon, RedDragon, BlackDragon, Troll]
