@@ -24,6 +24,10 @@ class Vector:
     def distance(self):
         return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
+x = Vector('1,2,3')
+y = Vector('2,3,4')
+print(x+y, x-y, x&y, sep = '\n')
+
 N = int(input())
 s = 1
 vectors = []
