@@ -1,9 +1,5 @@
+from itertools import combinations_with_replacement
 
-from itertools import groupby
 
-
-def compress_string(s):
-    a = []
-    for key, value in groupby(s):
-        a.append((len(list(value)), key))
-    return a
+def get_combinations_with_r(s, n):
+    return sorted([''.join(sorted(x)) for x in combinations_with_replacement(s, n)])
