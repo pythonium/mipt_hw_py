@@ -38,25 +38,31 @@ def scal_mul_threads(v1, v2):
     return res
 
 
-def scal_mul_proc(v1, v2):
-    procs = []
-    for i in range(len(v1)):
-        proc = Process(target = component_mul, args = (v1[i], v2[i]))
-        procs.append(proc)
-        proc.start()
-    for p in procs:
-        p.join()
 
 
-v1, v2 = [randint(10000000000, 100000000000000000) for i in range(10000)], [randint(10000000000, 100000000000000000000) for i in range(10000)]
+if __name__ == "__main__":
+
+    def scal_mul_proc(v1, v2):
+        procs = []
+        for i in range(len(v1)):
+            proc = Process(target = component_mul, args = (v1[i], v2[i]))
+            procs.append(proc)
+            proc.start()
+
+        for p in procs:
+            p.join()
+        return res
+
+    v1, v2 = [randint(10000000000, 100000000000000000) for i in range(10000)], [randint(10000000000, 100000000000000000000) for i in range(10000)]
 
 
-print('random generation ended')
+    print('random generation ended')
 
-end = []
-for f in (scal_mul, scal_mul_threads, scal_mul_proc):
-    start = time()
-    f(v1, v2)
-    end.append(time() - start)
+    jobtime = []
+    for f in (scal_mul, scal_mul_threads, scal_mul_proc):
+        start = time()
+        f(v1, v2)
+        end = time() - start
+        jobtime.append(end)
 
-print(*end)
+    print(*jobtime)
