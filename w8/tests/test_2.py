@@ -1,4 +1,4 @@
-from tasks.task3 import fib_gen
+from tasks.task2 import fib_gen
 import pytest
 
 
