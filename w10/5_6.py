@@ -12,16 +12,17 @@ def scal_mul(v1, v2):
         res += i*j
     return res
 
-
+'''
 def alt_mul(v1, v2):
     res = 0
     for i in range(len(v1)):
         res += v1[i]*v2[i]
     return res
-
+'''
 
 lock = threading.Lock()
 res = 0
+
 
 
 def component_mul(x, y):
@@ -29,6 +30,7 @@ def component_mul(x, y):
     lock.acquire()
     res += x*y
     lock.release()
+
 
 
 def scal_mul_threads(v1, v2):
@@ -47,11 +49,13 @@ if __name__ == "__main__":
         for i in range(len(v1)):
             proc = Process(target = component_mul, args = (v1[i], v2[i]))
             procs.append(proc)
-            proc.start()
 
+        for p in procs:
+            p.start()
         for p in procs:
             p.join()
         return res
+
 
     v1, v2 = [randint(10000000000, 100000000000000000) for i in range(10000)], [randint(10000000000, 100000000000000000000) for i in range(10000)]
 
