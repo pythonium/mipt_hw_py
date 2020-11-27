@@ -14,5 +14,6 @@ def fib_gen(n):
                     yield a + b
                     a, b = b, a+b
                     k += 1
-
-print(*fib_gen(8))
+    
+if __name__ == "__main__":
+    print(*fib_gen(8))
