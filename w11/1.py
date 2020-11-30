@@ -15,5 +15,5 @@ async def send_request(n = 10): #whatever 10 or 1000
 
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(send_request(10))
+loop.run_until_complete(send_request(1))
 loop.close()
