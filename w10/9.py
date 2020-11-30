@@ -25,12 +25,14 @@ def compute_sum(q, n = 8):
 
 def scal_mul_proc(v1, v2, n = 8): #n добавим чтобы установить кол-во процессов
     q = Queue()
+    global res
     procs = [Process(target = q.put, args = (v1[i]*v2[i], )) for i in range(n)]
     for p in procs:
         p.start()
     for p in procs:
         p.join()
-    return compute_sum(q, n)
+        res += q.get()
+    return res
 
 
 if __name__ == "__main__":
@@ -40,7 +42,7 @@ if __name__ == "__main__":
 
     print('random generation ended')
 
-    jobtime = {'simple':[], 'with_threads':[]}
+    jobtime = {'simple':[], 'with_processes':[]}
 
     for (u, v) in (v1, sample(v1, k = 10)), (v2, sample(v2, k = 100)), (v3, sample(v3, k = 1000)), (v4, sample(v4, k = 10000)):
 
@@ -52,12 +54,29 @@ if __name__ == "__main__":
                 end = time() - start
                 runtime += end
 
-            jobtime['simple'].append(runtime/3) if f is scal_mul else jobtime['with_threads'].append(runtime/3)
+            jobtime['simple'].append(runtime/3) if f is scal_mul else jobtime['with_processes'].append(runtime/3)
 
 
     print(jobtime)
 
-    plt.plot(jobtime['simple'], vector_len)
-    plt.plot(jobtime['with_threads'], vector_len)
+    plt.plot(vector_len, jobtime['simple'])
+    plt.plot(vector_len, jobtime['with_processes'])
     plt.grid(True)
+    plt.show()
+
+
+    #also...
+
+    how_many_procs = [1, 2, 4, 6, 8]
+    rtime = []
+    for n in how_many_procs:
+        end = 0
+        for i in range(5):
+            start = time()
+            scal_mul_proc(v4, sample(v4, k = 10000))   #самый жирный вектор
+            end += time() - start
+
+        rtime.append(end/5)
+
+    plt.plot(how_many_procs, rtime)
     plt.show()
