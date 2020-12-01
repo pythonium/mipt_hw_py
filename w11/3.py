@@ -2,16 +2,27 @@ import aiohttp
 import asyncio
 import aiofile
 
-async def get_response(url):
+async def fetch(url):
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
 
             html = await response.text()
-            print(html)
+            html = re.split(r'[\n]', html)
+            async with aiofile.async_open("found.txt", 'w+') as found:
+                for line in lines:
+                    if line.startswith("<a >"):
+                        found.writer(line)
 
-async def find_line():
-    async with aiofile.AIOFile("found.txt", 'w') as found:
-        async with aiofile.AIOFile("urls.txt", 'r') as urls:
-            for line in urls
-#what the fuck
+
+async def find_line(urls):
+#    async with aiofile.async_open(urls, 'r') as urlslist:
+    async for line in aiofile.LineReader(urls):
+        asyncio.ensure_future(fetch(line))
+
+
+if __name__ == "__main__":
+
+    loop = asyncio.get_event_loop()
+    with open('urls.txt', 'r') as urls:
+        loop.run_until_complete(find_line(urls))
