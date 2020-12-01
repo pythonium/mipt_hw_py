@@ -9,11 +9,10 @@ async def get_response(url):
             html = await response.text()
             return html
 
-async def send_request(n = 10): #whatever 10 or 1000
-    responses = [await get_response('http://127.0.0.1:8000') for i in range(n)]
-    print(*responses)
 
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(send_request(1))
+n = int(input())
+responses = [get_response('http://127.0.0.1:8000') for _ in range(n)]
+print(*loop.run_until_complete(asyncio.gather(*responses)))
 loop.close()
