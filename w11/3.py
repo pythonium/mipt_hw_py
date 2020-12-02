@@ -23,9 +23,8 @@ async def seeker(file):
         htmls = []
         async for url in aiofile.LineReader(urls):
             htmls.append(fetch(url))
-        #есть массив со всеми текстами страниц
         await asyncio.gather(*htmls)
-#    async with aiofile.async_open(urls, 'r') as urlslist:
+
 
 
 
