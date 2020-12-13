@@ -36,7 +36,24 @@ class TextLoader:
         return text
 
     def __getstate__(self):
-        pass
+        print("pickling")
+        return self.__dict__
 
-    def __setstate__(self):
-        pass
+
+    def __setstate__(self, d):
+        print("unpickling with these values:" + repr(d))
+        self.__dict__ = d
+        self.files = [file for file in list(self.path.glob('**/*')) if file.is_file()]
+
+
+#if __name__ == "__main__":
+path = r"C:\Users\plutonium\mipt_hw_py\w9"
+
+loaded = TextLoader(path)
+
+for i in range(len(loaded)):
+    try:
+        asdf = next(loaded)
+        print(asdf.read())
+    except StopIteration:
+        print("done")
